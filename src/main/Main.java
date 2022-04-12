@@ -1,22 +1,21 @@
 package main;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import db.MySQLDB;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
@@ -72,6 +71,31 @@ public class Main extends JFrame {
       contentPane.add(pwInputField);
       
       loginBtn = new JButton("로그인");
+      loginBtn.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      		
+      		
+      		String loginID = idInputField.getText();
+			String loginPW = pwInputField.getText();
+			
+			System.out.println("loginID 값 : " + loginID);
+			System.out.println("loginPW 값 : " + loginPW);
+			
+			MySQLDB db = new MySQLDB();
+			int loginResult = db.login(loginID, loginPW);
+			if(loginResult == 1000) {
+				LottoFrame lf = new LottoFrame();
+				lf.setVisible(true);
+				setVisible(false);
+				System.out.println("로그인 성공했으니 다른창을 띄워주세요");
+			}else {
+				JOptionPane.showMessageDialog(contentPane, "아이디나 비밀번호가 틀립니다.", "로그인 불가", 
+						JOptionPane.WARNING_MESSAGE);
+			}
+      		
+      		
+      	}
+      });
       loginBtn.setBounds(353, 190, 79, 110);
       contentPane.add(loginBtn);
       

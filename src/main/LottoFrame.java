@@ -16,11 +16,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JSpinner;
 
 @SuppressWarnings("serial")
 public class LottoFrame extends JFrame {
 
    private JPanel contentPane;
+   /**
+    * @wbp.nonvisual location=-45,287
+    */
+   private final JSpinner spinner = new JSpinner();
    
    public LottoFrame() {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
